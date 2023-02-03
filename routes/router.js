@@ -17,6 +17,7 @@ import {
   registerUser,
   updateUser,
 } from "../controllers/user-controller.js";
+import upload from "../middlewares/multer.js";
 const route = express.Router();
 
 route.get("/", (req, res) => {
@@ -37,5 +38,9 @@ route.get("/post", getPosts);
 //CATEGORIES-ROUTES
 route.post("/category/create", createCategory);
 route.get("/category/get", getCategories);
+//UPLOAD-IMAGES
+route.post("/upload/image", upload.single("file"), (req, res) => {
+  res.status(200).json("file has been uploaded");
+});
 
 export default route;
