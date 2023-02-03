@@ -1,10 +1,14 @@
 import multer from "multer";
-const storage = multer.diskStorage({
-  destination: (req, file, done) => {
-    done(null, "images");
-  },
-  filename: (req, file, done) => {
-    done(null, "hello.jpeg");
+import { GridFsStorage } from "multer-gridfs-storage";
+import dotenv from "dotenv";
+dotenv.config();
+const storage = new GridFsStorage({
+  url: process.env.MONGODB_URI,
+  file: (req, file) => {
+    return {
+      filename: "file_" + Date.now(),
+      bucketName: "photos",
+    };
   },
 });
 const upload = multer({ storage: storage });

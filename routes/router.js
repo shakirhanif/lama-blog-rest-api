@@ -4,6 +4,11 @@ import {
   getCategories,
 } from "../controllers/category-controller.js";
 import {
+  getAllImages,
+  getImage,
+  uploadImage,
+} from "../controllers/image-controller.js";
+import {
   createPost,
   deletePost,
   getPost,
@@ -39,8 +44,8 @@ route.get("/post", getPosts);
 route.post("/category/create", createCategory);
 route.get("/category/get", getCategories);
 //UPLOAD-IMAGES
-route.post("/upload/image", upload.single("file"), (req, res) => {
-  res.status(200).json("file has been uploaded");
-});
+route.post("/upload/image", upload.single("file"), uploadImage);
+route.get("/files", getAllImages);
+route.get("/files/:filename", getImage);
 
 export default route;
