@@ -1,5 +1,9 @@
 import express from "express";
 import {
+  createCategory,
+  getCategories,
+} from "../controllers/category-controller.js";
+import {
   createPost,
   deletePost,
   getPost,
@@ -30,5 +34,8 @@ route.delete("/post/delete/:id", deletePost);
 route.put("/post/update/:id", updatePost);
 route.get("/post/get/:id", getPost);
 route.get("/post", getPosts);
+//CATEGORIES-ROUTES
+route.post("/category/create", createCategory);
+route.get("/category/get", getCategories);
 
 export default route;
