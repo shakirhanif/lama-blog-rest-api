@@ -3,8 +3,6 @@ import Grid from "gridfs-stream";
 import dotenv from "dotenv";
 dotenv.config();
 
-const url = "http://localhost:3000";
-
 var conn = mongoose.createConnection(process.env.MONGODB_URI);
 let gfs, gridfsBucket;
 conn.once("open", function () {
@@ -47,6 +45,6 @@ export const uploadImage = async (req, res) => {
   if (!req.file) {
     res.status(404).json("no file attached");
   } else {
-    res.status(200).json(`${url}/files/${req.file.filename}`);
+    res.status(200).json(req.file.filename);
   }
 };
