@@ -6,7 +6,7 @@ const storage = new GridFsStorage({
   url: process.env.MONGODB_URI,
   file: (req, file) => {
     return {
-      filename: "file_" + Date.now(),
+      filename: "photo_" + Date.now() + "_" + file.originalname,
       bucketName: "photos",
     };
   },
