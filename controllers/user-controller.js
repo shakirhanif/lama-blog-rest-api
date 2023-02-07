@@ -1,6 +1,5 @@
 import User from "../models/User.js";
 import Post from "../models/Post.js";
-
 import bcrypt from "bcrypt";
 
 export const registerUser = async (req, res) => {
@@ -16,7 +15,6 @@ export const registerUser = async (req, res) => {
     return;
   }
 };
-
 export const loginUser = async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
@@ -26,8 +24,14 @@ export const loginUser = async (req, res) => {
       const match = await bcrypt.compare(req.body.password, user.password);
       !match && res.status(400).json("wrong password");
       if (match) {
+        const accessToken = jwt.sign(
+          { username: user.username, userId: user._id },
+          "mySecretKey",
+          { expiresIn: "15m" }
+        );
         const { password, ...others } = user._doc;
-        res.status(200).json(others);
+        res.status(200).json({ user: others, accessToken });
+        // res.status(200).json(others);
       }
     }
   } catch (error) {
