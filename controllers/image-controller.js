@@ -31,7 +31,7 @@ export const getImage = async (req, res) => {
     if (!file) {
       res.status(404).json("no file exists");
     } else if (file.contentType === "image/jpeg") {
-      const readStream = await gridfsBucket.openDownloadStream(file._id);
+      const readStream = gridfsBucket.openDownloadStream(file._id);
       readStream.pipe(res);
     } else {
       res.status(404).json("type of file is incompatible");
