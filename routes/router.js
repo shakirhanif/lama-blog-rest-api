@@ -45,7 +45,7 @@ route.post("/category/create", createCategory);
 route.get("/category/get", getCategories);
 //UPLOAD-IMAGES
 route.post("/upload/image", upload.single("file"), uploadImage);
-route.get("/files", getAllImages);
-route.get("/files/:filename", getImage);
+route.get("/files/multerfs", getAllImages);
+route.get("/filesmulterfs/:filename", getImage);
 
 export default route;
